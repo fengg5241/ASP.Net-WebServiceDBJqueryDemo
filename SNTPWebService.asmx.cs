@@ -61,5 +61,20 @@ namespace TestWebServiceAndDB
             
             return lights;
         }
+        
+        
+        [WebMethod]
+        public bool verifyReCaptcha(string response)
+        {
+
+            string siteKey = "6LeO50AUAAAAADX3fY7XJu_rMk_FvvF08SZhODUe";
+            string secretKey = "6LeO50AUAAAAAAwgRaoPpxVbrZ2EOrx_X5j3H1wz";
+            string url = "https://www.google.com/recaptcha/api/siteverify?secret=" + secretKey + "&response=" + response;
+            string result = (new WebClient()).DownloadString(url);
+
+
+            return result.IndexOf("true") > 0;
+
+        }
     }
 }
